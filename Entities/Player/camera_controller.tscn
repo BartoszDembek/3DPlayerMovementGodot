@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcsl55uyyq7i3"]
+[gd_scene load_steps=3 format=3 uid="uid://bcsl55uyyq7i3"]
 
 [ext_resource type="Script" path="res://Entities/Player/camera_controller.gd" id="1_16ady"]
 
-[node name="CameraController" type="Node3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_n244a"]
+
+[node name="CameraController" type="SpringArm3D"]
+shape = SubResource("SphereShape3D_n244a")
+spring_length = 6.5
 script = ExtResource("1_16ady")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.925316, 0.379198, 0, -0.379198, 0.925316, 0, 5.15727, 5.8467)
+current = true
