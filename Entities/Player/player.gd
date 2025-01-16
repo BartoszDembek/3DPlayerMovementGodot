@@ -18,18 +18,19 @@ var movement_input := Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
 	move_logic(delta)
-	#velocity = Vector3(movement_input.x,0,movement_input.y) * base_speed
-
 	jump_logic(delta)
 	move_and_slide()
 	
 func move_logic(delta) -> void:
 	movement_input = Input.get_vector("left","right","forward","backward").rotated(-camera.global_rotation.y)
 	var vel_2d = Vector2(velocity.x,velocity.z)
+	var is_running: bool = Input.is_action_pressed("run")
 	
 	if movement_input != Vector2.ZERO:
-		vel_2d += movement_input * base_speed * delta
-		vel_2d = vel_2d.limit_length(base_speed)
+		var speed = run_speed if is_running else base_speed
+		
+		vel_2d += movement_input * speed * delta
+		vel_2d = vel_2d.limit_length(speed)
 		velocity.x = vel_2d.x
 		velocity.z = vel_2d.y
 	else:
